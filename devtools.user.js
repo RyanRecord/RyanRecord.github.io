@@ -211,7 +211,7 @@
                 <h2>游戏状态编辑</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div>
-                        <h3>基础信息</h3>
+                        <h3>基础信息(不可通过填数字编辑)</h3>
                         <div style="margin-bottom: 10px;">
                             <label style="display: block; margin-bottom: 5px;">当前周数:</label>
                             <input type="number" id="game-week" value="${game.week || 1}" style="width: 100px; padding: 8px;">
@@ -235,9 +235,10 @@
                     </div>
                     <div>
                         <h3>快速操作</h3>
-                        <button id="add-budget" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #56a85a; color: white; border: none; border-radius: 4px;">+10,000 预算</button>
+                        <button id="add-budget" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #56a85a; color: white; border: none; border-radius: 4px;">+100,000 预算</button>
                         <button id="add-reputation" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #2196F3; color: white; border: none; border-radius: 4px;">+10 声誉</button>
                         <button id="next-week" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #FF9800; color: white; border: none; border-radius: 4px;">下一周</button>
+                        <button id="pre-week" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #FF9800; color: white; border: none; border-radius: 4px;">上一周</button>
                         <button id="reset-pressure" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #9C27B0; color: white; border: none; border-radius: 4px;">重置所有学生压力</button>
                     </div>
                 </div>
@@ -458,13 +459,13 @@
 
                 if (e.target.id === 'add-budget')
                 {
-                    game.budget = (game.budget || 0) + 10000;
+                    game.budget = (game.budget || 0) + 100000;
                     this.updateGameFields();
                     // 刷新游戏UI
                     if (typeof window.renderAll === 'function') {
                         window.renderAll();
                     }
-                    this.showNotification('预算已增加 10,000');
+                    this.showNotification('预算已增加 100,000');
                 } else if (e.target.id === 'add-reputation')
                 {
                     game.reputation = Math.min(100, (game.reputation || 0) + 10);
@@ -474,8 +475,8 @@
                         window.renderAll();
                     }
                     this.showNotification('声誉已增加 10');
-                } else if (e.target.id === 'next-week')
-                {
+
+                } else if (e.target.id === 'next-week') {
                     game.week = (game.week || 1) + 1;
                     this.updateGameFields();
                     // 刷新游戏UI
@@ -483,7 +484,17 @@
                         window.renderAll();
                     }
                     this.showNotification('已进入下一周');
-                } else if (e.target.id === 'reset-pressure')
+                } else if (e.target.id === 'pre-week') {
+                    game.week = Math.max(1, game.week - 1);
+                    this.updateGameFields();
+                    // 刷新游戏UI
+                    if (typeof window.renderAll === 'function') {
+                        window.renderAll();
+                    }
+                    this.showNotification('已进入上一周');
+                }
+                    
+                else if (e.target.id === 'reset-pressure')
                 {
                     this.resetAllPressure();
                 }
