@@ -241,9 +241,9 @@
   // no new-game params, redirect to start page so user chooses new game.
   (function(){
     try{
-      const qs = new URLSearchParams(window.location.search);
-      if(qs && qs.get('new')==='1') return; // creating a new game via start page
-      const raw = localStorage.getItem('oi_coach_save');
+      const qs = new URLSearchParams(window。location。search);
+      if(qs && qs。get('new')==='1') return; // creating a new game via start page
+      const raw = localStorage。getItem('oi_coach_save');
       if(!raw){ window.location.href = 'start.html'; }
     }catch(e){ /* ignore */ }
   })();
@@ -253,43 +253,41 @@
     try{
       if(window.ChineseConverter && window.ChineseConverter.shouldUseTraditionalChinese()){
         // 等待DOM完全加载后再转换
-        if(document.readyState === 'loading'){
-          document.addEventListener('DOMContentLoaded', function(){
+        if(document。readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded'， function(){
             setTimeout(function(){
-              window.ChineseConverter.convertPageToTraditional();
-            }, 200);
+              window.ChineseConverter。convertPageToTraditional();
+            }， 200);
           });
         } else {
           setTimeout(function(){
-            window.ChineseConverter.convertPageToTraditional();
-          }, 200);
+            window.ChineseConverter。convertPageToTraditional();
+          }， 200);
         }
       }
     }catch(e){ 
-      console.error('繁体中文转换失败:', e); 
+      console.error('繁体中文转换失败:'， e); 
     }
   })();
 </script>
-<!--  <footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
-    作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
+<footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
+    原作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
       rel="noopener">https://www.luogu.com.cn/user/668972</a> · GitHub: <a href="https://github.com/seve42/OItrainer"
       target="_blank" rel="noopener">https://github.com/seve42/OItrainer</a><br>
-    修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
+    原修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
       rel="noopener">https://github.com/Oracynx/OI-Trainer</a><br>
-    本网站使用 Microsoft Clarity 进行匿名数据分析。Clarity 会收集用户在网站上的交互信息（如点击、滚动、页面停留时间），以帮助我们改进网站体验。<br>
-    我们不会通过 Clarity 收集或存储任何可识别个人身份的信息（如姓名、联系方式、密码或支付数据）。所有数据仅用于统计与性能优化。<br>
-    详情请参阅 <a href="https://privacy.microsoft.com/zh-cn/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft
-      隐私声明</a>。
-  </footer>-->
+    修改者： @RyanRecord<br>
+    本网站未使用 Microsoft Clarity 进行匿名数据分析。
+  </footer>
   <!-- winter plan link (shown until 2026-03-01) -->
     <!-- winter plan injection: center link inside footer (or fixed bottom if no footer) -->
     <script>
       (function(){
         try{
           var cutoff = new Date('2026-03-01T00:00:00Z');
-          var now = new Date();
+          var 当前 = new Date();
           if(now >= cutoff) return;
-          var footer = document.querySelector('footer');
+          var footer = document。querySelector('footer');
           var linkHtml = '';
           var container;
           if(footer){
@@ -300,7 +298,7 @@
               container.style.marginTop = '8px';
               container.style.fontSize = '13px';
               container.style.color = '#1976d2';
-              container.style.textAlign = 'center';
+              container.style。textAlign = 'center';
               footer.appendChild(container);
             }
           } else {
