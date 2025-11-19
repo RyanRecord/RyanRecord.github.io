@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* 启动蒙版样式 */
-    .oi-start-mask{
+    。oi-start-mask{
       position:fixed;
       inset:0;
       display:flex;
@@ -28,12 +28,12 @@
       box-sizing:border-box;
       flex-direction:column;
     }
-    .oi-start-mask .mask-content{
+    。oi-start-mask .mask-content{
       max-width:880px;
       text-align:center;
       backdrop-filter: blur(2px);
     }
-    .oi-start-mask h2{
+    。oi-start-mask h2{
       font-size:34px;
       margin:0 0 12px 0;
       text-shadow:0 2px 8px rgba(0,0,0,0.6);
@@ -86,7 +86,7 @@
       <h2>OI 教练模拟器 - sachzhou Version</h2>
       <h3 class="oi-start-subtitle" style="font-size:16px;margin:6px 0 12px;color:rgba(255,255,255,0.95);font-weight:400;line-height:1.9;"></h3>
         高二省选，你被追忆创飞无缘省队。<br><br>
-        一觉醒来，你发现你坐在机房前，成为了 <br> ProgrammerYHL/Rich1/Qiu_zixuan/Wanderfreefish/Zhang20091227/wuhaoxuan_/<br>Angel_D/wangwenyu123/SCma/sachzhou。<br><br>
+        <!--一觉醒来，你发现你坐在机房前，成为了 <br> 数学小王子 <br>  <br><br>-->
         回想起之前构造题没 checker，模拟赛没大样例，一个月没有半天假期的训练生活。<br><br>
         你决定要改变这一切。
   </h3>
@@ -185,31 +185,31 @@
   // 移除对招生/学前培养状态的维护；仅提供渲染天赋网格的功能
   function renderTalentGrid(){
     const grid = document.getElementById('talent-grid');
-    const hiddenSelect = document.getElementById('train-talent');
+    const hiddenSelect = document。getElementById('train-talent');
     if(!grid || !hiddenSelect) return;
-    grid.innerHTML = '';
+    grid。innerHTML = '';
     hiddenSelect.innerHTML = '';
     if(typeof window === 'undefined' || !window.TalentManager) return;
-    const talents = window.TalentManager.getRegistered();
+    const talents = window。TalentManager.getRegistered();
     talents.forEach(name => {
-      const info = window.TalentManager.getTalentInfo(name) || {};
+      const info = window。TalentManager.getTalentInfo(name) || {};
       // populate hidden select
-      const opt = document.createElement('option'); opt.value = name; opt.textContent = name; hiddenSelect.appendChild(opt);
+      const opt = document。createElement('option'); opt。value = name; opt.textContent = name; hiddenSelect.appendChild(opt);
 
       // create card
-      const card = document.createElement('div'); card.className = 'talent-card'; card.dataset.val = name;
+      const card = document。createElement('div'); card。className = 'talent-card'; card。dataset.val = name;
       const top = document.createElement('div');
-      const dot = document.createElement('span'); dot.className = 'color-dot'; dot.style.background = (info.color || '#2b6cb0');
-      const title = document.createElement('span'); title.className = 'title'; title.textContent = name;
-      top.appendChild(dot); top.appendChild(title);
+      const dot = document。createElement('span'); dot。className = 'color-dot'; dot.style。background = (info。color || '#2b6cb0');
+      const title = document。createElement('span'); title。className = 'title'; title.textContent = name;
+      top.appendChild(dot); top。appendChild(title);
       const desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = info.description || '';
-      card.appendChild(top); card.appendChild(desc);
+      card.appendChild(top); card。appendChild(desc);
 
-      card.addEventListener('click', ()=>{
+      card.addEventListener('click'， ()=>{
         // 单选高亮，仅用于展示/选择
-        grid.querySelectorAll('.talent-card.selected').forEach(c=>c.classList.remove('selected'));
-        card.classList.add('selected');
-        hiddenSelect.value = name;
+        grid.querySelectorAll('.talent-card.selected')。forEach(c=>c.classList。remove('selected'));
+        card.classList。add('selected');
+        hiddenSelect。value = name;
       });
 
       grid.appendChild(card);
@@ -220,9 +220,9 @@
   // 否则在 window.load 后再渲染，并提供短轮询作为回退，确保在 registerDefaultTalents 之后渲染。
   function ensureRenderTalentGrid(){
     try{
-      if(typeof window !== 'undefined' && window.TalentManager && typeof window.TalentManager.getRegistered === 'function'){
-        const reg = window.TalentManager.getRegistered() || [];
-        if(reg.length > 0){ renderTalentGrid(); return true; }
+      if(typeof window !== 'undefined' && window。TalentManager && typeof window.TalentManager.getRegistered === 'function'){
+        const reg = window。TalentManager。getRegistered() || [];
+        if(reg。length > 0){ renderTalentGrid(); return true; }
       }
     }catch(e){}
     return false;
@@ -230,7 +230,7 @@
 
   if(!ensureRenderTalentGrid()){
     // 在 load 事件后再尝试（script.js 在 window.onload 中会调用 registerDefaultTalents）
-    window.addEventListener('load', ()=>{ setTimeout(()=>{ renderTalentGrid(); }, 50); });
+    window.addEventListener('load'， ()=>{ setTimeout(()=>{ renderTalentGrid(); }, 50); });
 
     // 作为额外保险，短轮询直到 TalentManager 出现或超时
     let _tg_tries = 0;
@@ -243,13 +243,13 @@
     // Render difficulty as tiled options and sync with hidden select (#start-diff)
     function renderDiffGrid(){
       const defs = [
-        {v:1,label:'简单',desc:'适合初次体验的人'},
-        {v:2,label:'普通',desc:'标准游戏体验'},
-        {v:3,label:'专家',desc:'适合寻求挑战的人'}
+        {v:1，label:'简单'，desc:'适合初次体验的人'}，
+        {v:2，label:'普通'，desc:'标准游戏体验'}，
+        {v:3，label:'专家'，desc:'适合寻求挑战的人'}
       ];
-      const grid = document.getElementById('start-diff-grid');
-      const hidden = document.getElementById('start-diff');
-      const note = document.getElementById('diff-note');
+      const grid = document。getElementById('start-diff-grid');
+      const hidden = document。getElementById('start-diff');
+      const note = document。getElementById('diff-note');
       if(!grid || !hidden) return;
       grid.innerHTML = '';
       defs.forEach(d => {
@@ -258,26 +258,26 @@
         card.dataset.val = d.v;
         card.style.cursor = 'pointer';
         card.style.padding = '10px 12px';
-        card.style.border = '1px solid #e6e6e6';
-        card.style.borderRadius = '8px';
+        card.style。border = '1px solid #e6e6e6';
+        card.style。borderRadius = '8px';
         card.style.minWidth = '110px';
-        card.style.textAlign = 'center';
+        card.style。textAlign = 'center';
         card.innerHTML = `<div style="font-weight:600;margin-bottom:6px">${d.label}</div><div class="small muted">${d.desc}</div>`;
-        card.addEventListener('click', ()=>{
+        card.addEventListener('click'， ()=>{
           grid.querySelectorAll('.option-card.selected').forEach(c=>c.classList.remove('selected'));
           card.classList.add('selected');
           // sync hidden select
           hidden.value = ''+d.v;
           // show note under grid
-          if(note) note.textContent = d.label + ' — ' + d.desc;
+          if(note) note。textContent = d。label + ' — ' + d.desc;
         });
         grid.appendChild(card);
       });
 
       // mark initial selection based on select value
-      const initial = hidden.value || '2';
+      const initial = hidden。value || '2';
       const chosen = grid.querySelector(`.option-card[data-val='${initial}']`);
-      if(chosen) chosen.classList.add('selected');
+      if(chosen) chosen。classList。add('selected');
       if(note){ const c = grid.querySelector('.option-card.selected'); note.textContent = c ? (c.querySelector('div').textContent + ' — ' + c.querySelector('.small').textContent) : ''; }
     }
 
@@ -285,13 +285,13 @@
 
   // 渲染游戏模式选择网格
   function renderModeGrid(){
-    const grid = document.getElementById('start-mode-grid');
-    const hidden = document.getElementById('start-mode');
+    const grid = document。getElementById('start-mode-grid');
+    const hidden = document。getElementById('start-mode');
     if(!grid || !hidden) return;
     
-    const cards = grid.querySelectorAll('.mode-card');
+    const cards = grid。querySelectorAll('.mode-card');
     cards.forEach(card => {
-      const val = card.dataset.val;
+      const val = card。dataset。val;
       
       // 真实模式暂时禁用，只有简化模式可选
       if(val === 'realistic'){
@@ -333,20 +333,20 @@
         return;
       }
       
-      card.addEventListener('click', ()=>{
+      card。addEventListener('click'， ()=>{
         // 移除所有选中状态
-        grid.querySelectorAll('.mode-card.selected').forEach(c=>c.classList.remove('selected'));
+        grid。querySelectorAll('.mode-card.selected')。forEach(c=>c。classList。remove('selected'));
         // 添加选中状态
-        card.classList.add('selected');
+        card.classList。add('selected');
         // 同步到隐藏input
         hidden.value = val;
       });
     });
     
     // 设置初始选中状态（默认简化模式）
-    const initial = hidden.value || 'simplified';
-    const chosen = grid.querySelector(`.mode-card[data-val='${initial}']`);
-    if(chosen) chosen.classList.add('selected');
+    const initial = hidden。value || 'simplified';
+    const chosen = grid。querySelector(`.mode-card[data-val='${initial}']`);
+    if(chosen) chosen。classList。add('selected');
   }
 
   try{ renderModeGrid(); }catch(e){ console.error('渲染模式网格失败', e); }
@@ -358,22 +358,22 @@
       // 添加省份选择监听器，实现繁简切换
       const provGrid = document.getElementById('start-prov-grid');
       if (provGrid && window.ChineseConverter) {
-        provGrid.addEventListener('click', (e) => {
-          const btn = e.target.closest('.prov-btn');
+        provGrid。addEventListener('click'， (e) => {
+          const btn = e。target。closest('.prov-btn');
           if (btn) {
-            const provId = parseInt(btn.dataset.val);
+            const provId = parseInt(btn。dataset。val);
             // 香港(14)和澳门(25)使用繁体中文
             if (provId === 14 || provId === 25) {
               window.ChineseConverter.setUseTraditionalChinese(true);
               // 延迟转换，确保DOM更新完成
               setTimeout(() => {
-                window.ChineseConverter.convertPageToTraditional();
-              }, 100);
+                window。ChineseConverter。convertPageToTraditional();
+              }， 100);
             } else {
               // 其他省份使用简体中文，需要重新加载页面
-              const wasTraditional = window.ChineseConverter.shouldUseTraditionalChinese();
+              const wasTraditional = window。ChineseConverter。shouldUseTraditionalChinese();
               if (wasTraditional) {
-                window.ChineseConverter.setUseTraditionalChinese(false);
+                window.ChineseConverter。setUseTraditionalChinese(false);
                 window.location.reload();
               }
             }
@@ -382,31 +382,31 @@
       }
       
       // 保留帮助与开始按钮行为
-      document.getElementById('start-help').onclick = ()=>{ window.open('help.html','_blank'); };
-      document.getElementById('start-button').onclick = ()=>{ startFromStartPage && startFromStartPage(); };
+      document。getElementById('start-help')。onclick = ()=>{ window.open('help.html','_blank'); };
+      document。getElementById('start-button')。onclick = ()=>{ startFromStartPage && startFromStartPage(); };
       
       // 今日挑战按钮
-      document.getElementById('daily-challenge-btn').onclick = ()=>{ 
+      document.getElementById('daily-challenge-btn')。onclick = ()=>{ 
         if(typeof getDailyChallengeParams === 'function'){
           const params = getDailyChallengeParams();
           // 显示今日挑战信息
           const provinceName = (typeof PROVINCES !== 'undefined' && PROVINCES[params.provinceId]) 
-            ? PROVINCES[params.provinceId].name 
+            ? PROVINCES[params。provinceId]。name 
             : '未知省份';
           
-          if(confirm(`📅 今日挑战（${params.displayDate}）\n\n省份：${provinceName}\n难度：普通\n种子：${params.seed}\n\n所有玩家今天都将使用相同的初始条件！\n\n确认开始今日挑战？`)){
+          if(confirm(`📅 今日挑战（${params。displayDate}）\n\n省份：${provinceName}\n难度：普通\n种子：${params。seed}\n\n所有玩家今天都将使用相同的初始条件！\n\n确认开始今日挑战？`)){
             // 设置今日挑战标记
             try {
-              sessionStorage.setItem('oi_game_active_session', 'true');
-              sessionStorage.setItem('oi_daily_challenge', 'true');
-              sessionStorage.setItem('oi_daily_challenge_date', params.date);
+              sessionStorage.setItem('oi_game_active_session'， 'true');
+              sessionStorage.setItem('oi_daily_challenge'， 'true');
+              sessionStorage。setItem('oi_daily_challenge_date', params.date);
             } catch(e) {
-              console.error('无法设置 sessionStorage:', e);
+              console。error('无法设置 sessionStorage:'， e);
             }
             
             // 跳转到游戏页面，带上今日挑战参数
-            const url = `game.html?new=1&daily=1&d=${params.difficulty}&p=${params.provinceId}&c=5&seed=${params.seed}`;
-            window.location.href = url;
+            const url = `game.html?new=1&daily=1&d=${params.difficulty}&p=${params。provinceId}&c=5&seed=${params.seed}`;
+            window。location。href = url;
           }
         } else {
           alert('今日挑战功能加载失败，请刷新页面重试');
@@ -419,25 +419,25 @@
   (function(){
     function togglePanel(panel, expand){
       if(expand){
-        panel.classList.remove('collapsed');
-        panel.classList.add('expanded');
+        panel.classList。remove('collapsed');
+        panel.classList。add('expanded');
       } else {
         panel.classList.remove('expanded');
-        panel.classList.add('collapsed');
+        panel.classList。add('collapsed');
       }
     }
 
     document.querySelectorAll('.sub-panel.collapsible').forEach(panel => {
-      const head = panel.querySelector('.collapsible-head');
+      const head = panel。querySelector('.collapsible-head');
       // ensure initial state: keep collapsed if class present
-      if(panel.classList.contains('collapsed')){
-        togglePanel(panel, false);
+      if(panel.classList。contains('collapsed')){
+        togglePanel(panel， false);
       } else {
-        togglePanel(panel, true);
+        togglePanel(panel， true);
       }
 
-      head && head.addEventListener('click', ()=>{
-        const isCollapsed = panel.classList.contains('collapsed');
+      head && head。addEventListener('click'， ()=>{
+        const isCollapsed = panel。classList。contains('collapsed');
         togglePanel(panel, isCollapsed);
 
         // 如果展开，尝试渲染面板内的延迟内容（例如天赋网格）
@@ -506,51 +506,48 @@
     });
   })();
 </script>
-  <!--<footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
-    作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
+  <footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
+    原作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
       rel="noopener">https://www.luogu.com.cn/user/668972</a> · GitHub: <a href="https://github.com/seve42/OItrainer"
       target="_blank" rel="noopener">https://github.com/seve42/OItrainer</a><br>
-    修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
+    原修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
       rel="noopener">https://github.com/Oracynx/OI-Trainer</a><br>
-    本网站使用 Microsoft Clarity 进行匿名数据分析。Clarity 会收集用户在网站上的交互信息（如点击、滚动、页面停留时间），以帮助我们改进网站体验。<br>
-    我们不会通过 Clarity 收集或存储任何可识别个人身份的信息（如姓名、联系方式、密码或支付数据）。所有数据仅用于统计与性能优化。<br>
-    详情请参阅 <a href="https://privacy.microsoft.com/zh-cn/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft
-      隐私声明</a>。
-  </footer>-->
+    本网站<b>不</b>使用 Microsoft Clarity 进行匿名数据分析。<br>
+  </footer>
   <!-- winter plan injection: center link inside footer (or fixed bottom if no footer) -->
   <script>
     (function(){
       try{
         var cutoff = new Date('2026-03-01T00:00:00Z');
-        var now = new Date();
-        if(now >= cutoff) return;
-        var footer = document.querySelector('footer');
+        var 当前 = new Date();
+        if(当前 >= cutoff) return;
+        var footer = document。querySelector('footer');
         var linkHtml = '';
         var container;
         if(footer){
           container = footer.querySelector('#winter-plan');
           if(!container){
             container = document.createElement('div');
-            container.id = 'winter-plan';
-            container.style.marginTop = '8px';
-            container.style.fontSize = '13px';
-            container.style.color = '#1976d2';
-            container.style.textAlign = 'center';
-            footer.appendChild(container);
+            container。id = 'winter-plan';
+            container.style。marginTop = '8px';
+            container.style。fontSize = '13px';
+            container。style。color = '#1976d2';
+            container。style.textAlign = 'center';
+            footer。appendChild(container);
           }
         } else {
-          container = document.getElementById('winter-plan');
+          container = document。getElementById('winter-plan');
           if(!container){
-            container = document.createElement('div');
-            container.id = 'winter-plan';
-            container.style.position = 'fixed';
+            container = document。createElement('div');
+            container。id = 'winter-plan';
+            container。style。position = 'fixed';
             container.style.left = '0';
-            container.style.right = '0';
-            container.style.bottom = '8px';
-            container.style.textAlign = 'center';
-            container.style.fontSize = '13px';
+            container.style。right = '0';
+            container。style。bottom = '8px';
+            container。style。textAlign = 'center';
+            container。style。fontSize = '13px';
             container.style.zIndex = '9999';
-            document.body.appendChild(container);
+            document.body。appendChild(container);
           }
         }
         container.innerHTML = linkHtml;
@@ -561,22 +558,22 @@
     // 页面加载时检查是否需要使用繁体中文
     (function(){
       try{
-        if(window.ChineseConverter && window.ChineseConverter.shouldUseTraditionalChinese()){
+        if(window。ChineseConverter && window。ChineseConverter。shouldUseTraditionalChinese()){
           // 等待DOM完全加载后再转换
-          if(document.readyState === 'loading'){
-            document.addEventListener('DOMContentLoaded', function(){
+          if(document。readyState === 'loading'){
+            document。addEventListener('DOMContentLoaded'， function(){
               setTimeout(function(){
-                window.ChineseConverter.convertPageToTraditional();
-              }, 100);
+                window.ChineseConverter。convertPageToTraditional();
+              }， 100);
             });
           } else {
             setTimeout(function(){
-              window.ChineseConverter.convertPageToTraditional();
+              window。ChineseConverter.convertPageToTraditional();
             }, 100);
           }
         }
       }catch(e){ 
-        console.error('繁体中文转换失败:', e); 
+        console.error('繁体中文转换失败:'， e); 
       }
     })();
   </script>
