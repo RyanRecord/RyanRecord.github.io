@@ -205,7 +205,7 @@
       const desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = info.description || '';
       card.appendChild(top); card.appendChild(desc);
 
-      card.addEventListener('click'， ()=>{
+      card.addEventListener('click', ()=>{
         // 单选高亮，仅用于展示/选择
         grid.querySelectorAll('.talent-card.selected').forEach(c=>c.classList.remove('selected'));
         card.classList.add('selected');
