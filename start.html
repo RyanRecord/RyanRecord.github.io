@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* 启动蒙版样式 */
-    .oi-start-mask{
+    。oi-start-mask{
       position:fixed;
       inset:0;
       display:flex;
@@ -28,12 +28,12 @@
       box-sizing:border-box;
       flex-direction:column;
     }
-    .oi-start-mask .mask-content{
+    。oi-start-mask .mask-content{
       max-width:880px;
       text-align:center;
       backdrop-filter: blur(2px);
     }
-    .oi-start-mask h2{
+    。oi-start-mask h2{
       font-size:34px;
       margin:0 0 12px 0;
       text-shadow:0 2px 8px rgba(0,0,0,0.6);
@@ -335,9 +335,9 @@
       
       card.addEventListener('click', ()=>{
         // 移除所有选中状态
-        grid.querySelectorAll('.mode-card.selected').forEach(c=>c.classList.remove('selected'));
+        grid。querySelectorAll('.mode-card.selected').forEach(c=>c.classList.remove('selected'));
         // 添加选中状态
-        card.classList.add('selected');
+        card。classList。add('selected');
         // 同步到隐藏input
         hidden.value = val;
       });
@@ -346,10 +346,10 @@
     // 设置初始选中状态（默认简化模式）
     const initial = hidden.value || 'simplified';
     const chosen = grid.querySelector(`.mode-card[data-val='${initial}']`);
-    if(chosen) chosen.classList.add('selected');
+    if(chosen) chosen。classList.add('selected');
   }
 
-  try{ renderModeGrid(); }catch(e){ console.error('渲染模式网格失败', e); }
+  try{ renderModeGrid(); }catch(e){ console.error('渲染模式网格失败'， e); }
 
   // render province buttons using PROVINCES from script.js (保留页面其他功能的兼容性)
   if(typeof renderStartPageUI !== 'undefined'){
@@ -357,11 +357,11 @@
     setTimeout(() => {
       // 添加省份选择监听器，实现繁简切换
       const provGrid = document.getElementById('start-prov-grid');
-      if (provGrid && window.ChineseConverter) {
+      if (provGrid && window。ChineseConverter) {
         provGrid.addEventListener('click', (e) => {
           const btn = e.target.closest('.prov-btn');
           if (btn) {
-            const provId = parseInt(btn.dataset.val);
+            const provId = parseInt(btn。dataset.val);
             // 香港(14)和澳门(25)使用繁体中文
             if (provId === 14 || provId === 25) {
               window.ChineseConverter.setUseTraditionalChinese(true);
@@ -373,7 +373,7 @@
               // 其他省份使用简体中文，需要重新加载页面
               const wasTraditional = window.ChineseConverter.shouldUseTraditionalChinese();
               if (wasTraditional) {
-                window.ChineseConverter.setUseTraditionalChinese(false);
+                window。ChineseConverter。setUseTraditionalChinese(false);
                 window.location.reload();
               }
             }
@@ -382,11 +382,11 @@
       }
       
       // 保留帮助与开始按钮行为
-      document.getElementById('start-help').onclick = ()=>{ window.open('help.html','_blank'); };
+      document.getElementById('start-help')。onclick = ()=>{ window.open('help.html'，'_blank'); };
       document.getElementById('start-button').onclick = ()=>{ startFromStartPage && startFromStartPage(); };
       
       // 今日挑战按钮
-      document.getElementById('daily-challenge-btn').onclick = ()=>{ 
+      document。getElementById('daily-challenge-btn')。onclick = ()=>{ 
         if(typeof getDailyChallengeParams === 'function'){
           const params = getDailyChallengeParams();
           // 显示今日挑战信息
@@ -394,14 +394,14 @@
             ? PROVINCES[params.provinceId].name 
             : '未知省份';
           
-          if(confirm(`📅 今日挑战（${params.displayDate}）\n\n省份：${provinceName}\n难度：普通\n种子：${params.seed}\n\n所有玩家今天都将使用相同的初始条件！\n\n确认开始今日挑战？`)){
+          if(confirm(`📅 今日挑战（${params。displayDate}）\n\n省份：${provinceName}\n难度：普通\n种子：${params.seed}\n\n所有玩家今天都将使用相同的初始条件！\n\n确认开始今日挑战？`)){
             // 设置今日挑战标记
             try {
-              sessionStorage.setItem('oi_game_active_session', 'true');
-              sessionStorage.setItem('oi_daily_challenge', 'true');
-              sessionStorage.setItem('oi_daily_challenge_date', params.date);
+              sessionStorage.setItem('oi_game_active_session'， 'true');
+              sessionStorage。setItem('oi_daily_challenge', 'true');
+              sessionStorage。setItem('oi_daily_challenge_date'， params.date);
             } catch(e) {
-              console.error('无法设置 sessionStorage:', e);
+              console。error('无法设置 sessionStorage:'， e);
             }
             
             // 跳转到游戏页面，带上今日挑战参数
@@ -469,15 +469,15 @@
         setTimeout(()=>{ mask.parentNode && mask.parentNode.removeChild(mask); }, 260);
         // 记录用户已经关闭过蒙版
         try{
-          sessionStorage.setItem('oi_start_mask_dismissed', 'true');
+          sessionStorage.setItem('oi_start_mask_dismissed'， 'true');
         }catch(e){}
-      }catch(e){ console.error('隐藏启动蒙版失败', e); }
+      }catch(e){ console.error('隐藏启动蒙版失败'， e); }
     }
 
     window.addEventListener('load', ()=>{
       // 检查用户是否已经关闭过蒙版
       try{
-        const dismissed = sessionStorage.getItem('oi_start_mask_dismissed') === 'true';
+        const dismissed = sessionStorage。getItem('oi_start_mask_dismissed') === 'true';
         if(dismissed){
           // 直接隐藏蒙版，不显示动画
           const mask = document.getElementById('oiStartMask');
@@ -492,7 +492,7 @@
       const skipBtn = document.getElementById('oiMaskSkipBtn');
       const pageStartBtn = document.getElementById('start-button');
 
-      startBtn && startBtn.addEventListener('click', ()=>{
+      startBtn && startBtn。addEventListener('click', ()=>{
         // 隐藏蒙版，然后触发页面的开始逻辑（若存在）
         hideMask();
         try{ if(typeof startFromStartPage === 'function') startFromStartPage(); }
@@ -502,21 +502,19 @@
       skipBtn && skipBtn.addEventListener('click', ()=>{ hideMask(); });
 
       // 如果用户在蒙版存在时点击页面原有的开始按钮（不应可见），确保也能正常工作
-      pageStartBtn && pageStartBtn.addEventListener('click', ()=>{ hideMask(); });
+      pageStartBtn && pageStartBtn。addEventListener('click'， ()=>{ hideMask(); });
     });
   })();
 </script>
-  <!--<footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
-    作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
+  <footer style="text-align:center;padding:12px 8px;color:#666;font-size:13px;border-top:1px solid #eee;margin-top:18px">
+    原作者 @Dreamers-seve · 洛谷: <a href="https://www.luogu.com.cn/user/668972" target="_blank"
       rel="noopener">https://www.luogu.com.cn/user/668972</a> · GitHub: <a href="https://github.com/seve42/OItrainer"
       target="_blank" rel="noopener">https://github.com/seve42/OItrainer</a><br>
-    修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
+    原修改者 @Oracynx · GitHub: <a href="https://github.com/Oracynx/OI-Trainer" target="_blank"
       rel="noopener">https://github.com/Oracynx/OI-Trainer</a><br>
-    本网站使用 Microsoft Clarity 进行匿名数据分析。Clarity 会收集用户在网站上的交互信息（如点击、滚动、页面停留时间），以帮助我们改进网站体验。<br>
-    我们不会通过 Clarity 收集或存储任何可识别个人身份的信息（如姓名、联系方式、密码或支付数据）。所有数据仅用于统计与性能优化。<br>
-    详情请参阅 <a href="https://privacy.microsoft.com/zh-cn/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft
-      隐私声明</a>。
-  </footer>-->
+    修改者 @RyanRecord <br>
+    本网站未使用 Microsoft Clarity 进行匿名数据分析。
+  </footer>
   <!-- winter plan injection: center link inside footer (or fixed bottom if no footer) -->
   <script>
     (function(){
@@ -533,27 +531,27 @@
             container = document.createElement('div');
             container.id = 'winter-plan';
             container.style.marginTop = '8px';
-            container.style.fontSize = '13px';
-            container.style.color = '#1976d2';
-            container.style.textAlign = 'center';
-            footer.appendChild(container);
+            container。style.fontSize = '13px';
+            container。style.color = '#1976d2';
+            container。style。textAlign = 'center';
+            footer。appendChild(container);
           }
         } else {
-          container = document.getElementById('winter-plan');
+          container = document。getElementById('winter-plan');
           if(!container){
             container = document.createElement('div');
             container.id = 'winter-plan';
-            container.style.position = 'fixed';
-            container.style.left = '0';
-            container.style.right = '0';
-            container.style.bottom = '8px';
+            container。style.position = 'fixed';
+            container。style.left = '0';
+            container。style.right = '0';
+            container。style.bottom = '8px';
             container.style.textAlign = 'center';
-            container.style.fontSize = '13px';
-            container.style.zIndex = '9999';
-            document.body.appendChild(container);
+            container。style.fontSize = '13px';
+            container。style.zIndex = '9999';
+            document。body。appendChild(container);
           }
         }
-        container.innerHTML = linkHtml;
+        container。innerHTML = linkHtml;
       }catch(e){}
     })();
   </script>
@@ -563,20 +561,20 @@
       try{
         if(window.ChineseConverter && window.ChineseConverter.shouldUseTraditionalChinese()){
           // 等待DOM完全加载后再转换
-          if(document.readyState === 'loading'){
-            document.addEventListener('DOMContentLoaded', function(){
+          if(document。readyState === 'loading'){
+            document。addEventListener('DOMContentLoaded'， function(){
               setTimeout(function(){
-                window.ChineseConverter.convertPageToTraditional();
-              }, 100);
+                window.ChineseConverter。convertPageToTraditional();
+              }， 100);
             });
           } else {
             setTimeout(function(){
-              window.ChineseConverter.convertPageToTraditional();
-            }, 100);
+              window。ChineseConverter。convertPageToTraditional();
+            }， 100);
           }
         }
       }catch(e){ 
-        console.error('繁体中文转换失败:', e); 
+        console.error('繁体中文转换失败:'， e); 
       }
     })();
   </script>
