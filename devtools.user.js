@@ -1284,7 +1284,7 @@
         {
             devButton.style.background = '#ad8a00';
         });
-        devButton。addEventListener('mouseleave'， () =>
+        devButton.addEventListener('mouseleave', () =>
         {
             devButton.style.background = '#9d3dcf';
         });
@@ -1309,10 +1309,10 @@
 
         // 创建更多功能按钮
         const devButton = createDevButton();
-        document.body。appendChild(devButton);
+        document.body.appendChild(devButton);
 
         // 按钮点击事件
-        devButton.addEventListener('click'， () =>
+        devButton.addEventListener('click', () =>
         {
             if (!devTools)
             {
@@ -1325,7 +1325,7 @@
     // 等待DOM加载完成后初始化
     if (document.readyState === 'loading')
     {
-        document.addEventListener('DOMContentLoaded'， main);
+        document.addEventListener('DOMContentLoaded', main);
     } else
     {
         main();
