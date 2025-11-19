@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         OI教练模拟器 - 作弊者工具
+// @name         OI教练模拟器 - 小工具
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  OI教练模拟器作弊者工具，支持编辑学生属性、天赋、晋级状态、预算、声誉等
+// @description  OI教练模拟器小工具，支持编辑学生属性、天赋、晋级状态、预算、声誉等
 // @author       Cline
 // @match        *://*/*
 // @grant        none
@@ -105,7 +105,7 @@
             return '<div style="display: flex; height: 100%;">' +
                 '<!-- 侧边栏 -->' +
                 '<div style="width: 200px; background: #f5f5f5; border-right: 1px solid #ddd; padding: 10px;">' +
-                '<h3 style="margin: 0 0 20px 0; color: #333;">作弊者工具</h3>' +
+                '<h3 style="margin: 0 0 20px 0; color: #333;">小工具</h3>' +
                 '<div class="tab-button ' + studentsActive + '" data-tab="students">学生管理</div>' +
                 '<div class="tab-button ' + gameActive + '" data-tab="game">游戏状态</div>' +
                 '<div class="tab-button ' + qualificationsActive + '" data-tab="qualifications">晋级状态</div>' +
@@ -1257,11 +1257,11 @@
         }
     }
 
-    // 创建作弊者工具按钮
+    // 创建小工具按钮
     function createDevButton()
     {
         const devButton = document.createElement('button');
-        devButton.innerHTML = '作弊者';
+        devButton.innerHTML = '更多功能';
         devButton.id = 'oi-dev-button';
         devButton.style.cssText = `
             position: fixed;
@@ -1284,7 +1284,7 @@
         {
             devButton.style.background = '#ad8a00';
         });
-        devButton.addEventListener('mouseleave', () =>
+        devButton。addEventListener('mouseleave'， () =>
         {
             devButton.style.background = '#9d3dcf';
         });
@@ -1299,20 +1299,20 @@
 
         if (!isSimulator)
         {
-            console.log('未检测到OI教练模拟器，作弊者工具未启用');
+            console.log('未检测到OI教练模拟器，小工具未启用');
             return;
         }
 
-        console.log('检测到OI教练模拟器，正在启用作弊者工具...');
+        console.log('检测到OI教练模拟器，正在启用小工具...');
 
         let devTools = null;
 
-        // 创建作弊者按钮
+        // 创建更多功能按钮
         const devButton = createDevButton();
-        document.body.appendChild(devButton);
+        document.body。appendChild(devButton);
 
         // 按钮点击事件
-        devButton.addEventListener('click', () =>
+        devButton.addEventListener('click'， () =>
         {
             if (!devTools)
             {
@@ -1325,7 +1325,7 @@
     // 等待DOM加载完成后初始化
     if (document.readyState === 'loading')
     {
-        document.addEventListener('DOMContentLoaded', main);
+        document.addEventListener('DOMContentLoaded'， main);
     } else
     {
         main();
