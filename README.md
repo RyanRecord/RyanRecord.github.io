@@ -1,3 +1,5 @@
+OI 训练中, 该存档只读.
+
 # OI-Trainer - cdshishi Version
 
 ## ⚖️ 许可协议
